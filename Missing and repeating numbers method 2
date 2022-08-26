@@ -1,0 +1,38 @@
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+def missingAndRepeating(arr, n):
+    # Write your code here
+    s1=0
+    for i in range(1,n+1):
+        s1 ^= i
+        s1 ^= arr[i-1]
+    
+    rsb = (s1 & (-s1))
+    num1 = 0
+    num2 = 0
+    for i in arr:
+        if i & rsb == rsb:
+            num1 ^= i
+        else:
+            num2 ^= i
+    
+    for i in range(1, n+1):
+        if i & rsb == rsb:
+            num1 ^= i
+        else:
+            num2 ^= i
+    
+    X =0
+    Y = 0
+    if num1 in arr:
+        Y = num1
+        X = num2
+    else:
+        X = num1
+        Y = num2
+        
+    
+    return [X,Y]

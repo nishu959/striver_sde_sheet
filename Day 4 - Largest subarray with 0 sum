@@ -1,0 +1,19 @@
+class Solution:
+    def maxLen(self, n, arr):
+        #Code here
+        h = {}
+        ans = 0
+        s = 0
+        for i in range(n):
+            s += arr[i]
+            
+            if s==0:
+                ans = i + 1
+                
+            if s in h:
+                ans = max(ans , i-h[s])
+            else:
+                h[s]=i
+                
+        return ans
+            

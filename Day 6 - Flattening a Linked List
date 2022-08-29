@@ -1,0 +1,66 @@
+#User function Template for python3
+
+
+'''
+
+class Node:
+    def __init__(self, d):
+        self.data=d
+        self.next=None
+        self.bottom=None
+        
+'''
+
+def flatten(root):
+    #Your code here
+    def merge(list1 , list2):
+        if list1 != None and list2==None:
+            return list1
+        if list2!=None and list1==None:
+            return list2
+        
+        root = None
+        while list1!=None and list2!=None:
+            if list1.data <= list2.data and root==None:
+                root = list1
+                node = root
+                list1 = list1.bottom
+                
+            elif list1.data > list2.data and root==None:
+                root = list2
+                node = root
+                list2 = list2.bottom
+                
+            elif list1.data <= list2.data:
+                node.bottom = list1
+                node = list1
+                list1 = list1.bottom
+                
+            elif list1.data > list2.data:
+                node.bottom = list2
+                node = list2
+                list2 = list2.bottom
+                
+            
+        while list1 !=None:
+            node.bottom = list1
+            node = list1
+            list1 = list1.bottom
+            
+        while list2 !=None:
+            node.bottom = list2
+            node = list2
+            list2 = list2.bottom
+            
+        return root
+        
+    
+    def fun(root):
+        if root == None or root.next==None:
+            return root
+            
+        root.next = fun(root.next)
+        root = merge(root , root.next)
+        return root
+    
+    return fun(root)   

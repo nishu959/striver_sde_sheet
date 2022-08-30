@@ -1,0 +1,28 @@
+class Solution:
+    
+    #Function to find the maximum profit and the number of jobs done.
+    def JobScheduling(self,Jobs,n):
+        
+        Jobs.sort(key = lambda x : x.profit, reverse=True)
+        
+        maxi = 0
+        for i in Jobs:
+            maxi = max(maxi , i.deadline)
+            
+        jobid = [-1]*(maxi+1)
+        
+        profit = 0
+        countjob = 0
+        for i in range(n):
+            
+            for j in range(Jobs[i].deadline, 0, -1):
+                if jobid[j]==-1:
+                    
+                    jobid[j]= Jobs[i].id
+                    countjob += 1
+                    profit += Jobs[i].profit
+                    break
+        
+        # print(jobid[1:])  jobs performed       
+        return [countjob , profit]
+            

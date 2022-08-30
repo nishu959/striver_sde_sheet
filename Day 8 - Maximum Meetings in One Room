@@ -1,0 +1,33 @@
+from typing import List
+class oops():
+    def __init__(self,n, s , e):
+        self.n = n
+        self.s = s
+        self.e = e
+    
+    def __lt__(self, nxt):
+        return self.e < nxt.e
+        
+
+        
+
+
+class Solution:
+    def maxMeetings(self, N : int, S : List[int], F : List[int]) -> List[int]:
+        # code here
+        l = []
+        n = len(S)
+        for i in range(n):
+            l.append(oops(i+1 , S[i], F[i]))
+    
+        l.sort()
+        ans = []
+        ans.append(l[0].n)
+        limit = l[0].e
+        for i in l[1:]:
+            if i.s > limit:
+                limit = i.e
+                ans.append(i.n)
+        ans.sort()
+        return ans
+ 

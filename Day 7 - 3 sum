@@ -1,0 +1,40 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        
+        nums.sort()
+        ans = set()
+        for i in range(len(nums)):
+            
+            if i>0 and nums[i]==nums[i-1]:
+                continue
+                
+            target = 0 - nums[i]
+            start = i+1
+            end = len(nums)-1
+            
+            while start < end:
+                tar = nums[start] + nums[end]
+                
+                if tar > target:
+                    end = end - 1
+                elif tar < target:
+                    start = start + 1
+                
+                else:
+                    ans.add((nums[i] , nums[start], nums[end]))
+
+                    while start<end and nums[start]==nums[start+1]:
+                        start += 1
+                    
+                    while start<end and nums[end]==nums[end-1]:
+                        end -= 1
+                        
+                    start += 1
+                    end -= 1
+                    
+                    
+        return ans
+                        
+                    
+            
+            

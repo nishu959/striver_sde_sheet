@@ -1,1 +1,23 @@
 
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        nums.sort()
+        def fun(idx , op):
+            
+            ans.append(op[:])
+            
+            for i in range(idx, len(nums)):
+                if i!=idx and nums[i]==nums[i-1]:
+                    continue
+                    
+                op.append(nums[i])
+                fun(i+1 , op)
+                op.pop()
+                
+            return
+        
+        fun(0, [])
+        return ans
+                
+        

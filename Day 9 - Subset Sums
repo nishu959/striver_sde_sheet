@@ -1,0 +1,13 @@
+class Solution:
+	def subsetSums(self, arr, N):
+		# code here
+		ans = []
+		def fun(ip , op):
+		    if ip==N:
+		        ans.append(op)
+		        return
+		    fun(ip+1 , op)
+		    fun(ip+1, op+arr[ip])
+		    
+		fun(0, 0)
+		return ans

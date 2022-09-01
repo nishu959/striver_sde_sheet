@@ -1,0 +1,20 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        
+        def fun(idx , op):
+            if idx == n:
+                ans.append(op[:])
+                return 
+            
+            op.append(nums[idx])
+            fun(idx + 1, op)
+            op.pop()
+            while idx<n-1 and nums[idx]==nums[idx+1]:
+                idx += 1
+            fun(idx+1 , op)
+            
+        ans = []
+        n = len(nums)
+        nums.sort()
+        fun(0, [])
+        return ans

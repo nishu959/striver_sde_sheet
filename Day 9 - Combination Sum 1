@@ -1,0 +1,25 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        def fun(idx , s , op):
+            
+            if s == target:
+                ans.append(op[:])
+                return 
+            
+            if s > target or idx==n or candidates[idx]>target:
+                return 
+
+            
+            op.append(candidates[idx])
+            fun(idx , s + candidates[idx] , op)
+            op.pop()
+            while idx<n-1 and candidates[idx]==candidates[idx+1]:
+                idx += 1
+            fun(idx+1, s , op)
+        
+        candidates.sort()
+        n = len(candidates)
+        fun(0, 0 , [])
+        return ans
+            

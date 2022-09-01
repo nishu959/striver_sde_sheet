@@ -1,0 +1,22 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        m = len(nums)
+        ans = []
+        def fun(idx, nums):
+            if idx == m:
+                ans.append(nums[:])
+                return
+            
+            for i in range(idx , m):
+                nums[idx], nums[i] = nums[i], nums[idx]
+                fun(idx+1, nums)
+                nums[idx], nums[i] = nums[i], nums[idx]
+
+                
+        fun(0, nums)
+        return ans
+    
+    
+    
+        
+    

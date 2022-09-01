@@ -1,0 +1,17 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        m = len(nums)
+        ans = []
+        def fun(n , l, op):
+            if n == m:
+                ans.append(op[:])
+                return
+                
+            for i in range(len(l)):
+                op.append(l[i])
+                fun(n+1, l[:i] + l[i+1:], op)
+                op.pop()
+                
+        fun(0, nums, [])
+        return ans
+    

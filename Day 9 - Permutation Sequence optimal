@@ -1,0 +1,30 @@
+class Solution:
+    def getPermutation(self, n: int, k: int) -> str:
+        
+        # 0th means 1st permuatation
+        #factorial till n-1
+        
+        fact = 1
+        l = []
+        for i in range(1, n):
+            l.append(i)
+            fact *= i
+            
+        l.append(n)
+        
+        k = k - 1 #0th based indexing
+        ans = ""
+        
+        while True:
+            ans += str(l[k//fact])
+            l.remove(l[k//fact])
+            
+            if len(l)==0:
+                break
+            
+            k = k % fact
+            fact = fact // len(l)
+            
+        return ans
+            
+            

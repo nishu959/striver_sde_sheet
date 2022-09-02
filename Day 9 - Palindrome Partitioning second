@@ -1,0 +1,44 @@
+
+class Solution:
+    def palindromicPartition(self, string):
+        # code here
+        
+        def is_palindrome(string, i,j):
+            while i < j:
+                if string[i] != string[j]:
+                    return False
+                i += 1
+                j -= 1
+            return True
+            
+        def fun(s, i , j):
+            mn = 10000
+            if i>=j:
+                return 0
+                
+            if dp[i][j]!=None:
+                return dp[i][j]
+                
+            if is_palindrome(s, i,j):
+                return 0
+            
+            
+                
+            for k in range(i , j):
+                
+                if is_palindrome(s, i, k):
+                    temp = fun(s, k+1, j) + 1
+                    
+                    
+                
+                
+                
+                mn = min(mn , temp)
+                
+            dp[i][j] = mn
+            return mn 
+        
+        N = len(string)        
+        dp =[[None for i in range(N+1)] for j in range(N+1)]    
+        
+        return fun(string, 0, N-1)

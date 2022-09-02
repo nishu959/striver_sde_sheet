@@ -1,0 +1,68 @@
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        
+        def check(mat , row , col):
+            
+            r = row
+            c = col
+            
+            while r >= 0 and c>= 0:
+                if mat[r][c]=="Q":
+                    return False
+                r -= 1
+                c -= 1
+            
+            r = row
+            c = col
+            while c>=0:
+                if mat[r][c]=="Q":
+                    return False
+                c -= 1
+            
+            r = row
+            c = col
+            while r<n and c>=0:
+                if mat[r][c]=="Q":
+                    return False
+                r += 1
+                c -= 1
+                
+            return True
+        
+        ans = []
+        def fun(mat , col):
+            if col==n:
+                ans.append(deepcopy(mat))
+                return
+            
+            for i in range(n):
+                if check(mat , i , col):
+                    mat[i][col]="Q"
+                    fun(mat , col+1)
+                    mat[i][col]="."
+        
+        def createBoard(n):
+            row = ["." for i in range(n)]
+            return [row[:] for i in range(n)]  
+        
+        mat = createBoard(n)
+        # print(mat)
+        fun(mat , 0)
+        
+        
+        res = []
+        for i in ans:
+            arr = []
+            for j in i:
+                temp = "".join(j)
+                arr.append(temp)
+            res.append(arr)
+        
+
+        return res
+            
+            
+                
+                
+                
+            

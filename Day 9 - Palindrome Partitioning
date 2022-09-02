@@ -1,0 +1,22 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        
+        def palin(st):
+            return st == st[::-1]
+        ans = []
+        n = len(s)
+        
+        def fun(ip, op):
+            if ip == n:
+                ans.append(op[:])
+                return
+            
+            for i in range(ip , n):
+                if palin(s[ip:i+1]):
+                    op.append(s[ip : i+1])
+                    fun(i+1 , op)
+                    op.pop()
+                    
+        fun(0, [])
+        return ans
+                

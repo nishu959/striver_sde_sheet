@@ -1,0 +1,50 @@
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """        
+        n = len(board)
+        rows = [set() for i in range(9)] #both ways to declare
+        cols = defaultdict(set)
+        box = defaultdict(set)
+        unfilled = []
+
+        for i in range(n):
+            for j in range(n):
+                if board[i][j]==".":
+                    unfilled.append((i , j))
+                    continue
+                
+                val = int(board[i][j])
+                rows[i].add(val)
+                cols[j].add(val)
+                idx = (i//3) * 3 + (j//3)
+                box[idx].add(val)
+                
+                    
+        def fun(board, idx):
+            if idx == len(unfilled):
+                return True
+            
+            i, j = unfilled[idx]
+            p = (i//3) * 3 + (j//3)
+            
+            
+            for k in range(1, 10):
+                if k not in rows[i] and k not in cols[j] and k not in box[p]:
+                    board[i][j] = str(k)
+                    rows[i].add(k)
+                    cols[j].add(k)
+                    box[p].add(k)
+                    ans =  fun(board, idx+1)
+                    if ans == True:
+                        return True
+                    rows[i].remove(k)
+                    cols[j].remove(k)
+                    box[p].remove(k)
+                    
+            return False
+            
+        fun(board , 0)
+        return board
+            

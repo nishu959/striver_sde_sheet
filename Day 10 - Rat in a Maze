@@ -1,0 +1,26 @@
+
+class Solution:
+    def findPath(self, m, n):
+        # code here
+        visited = set()
+        ans = []
+        def fun(i , j , op):
+            if i<0 or j<0 or i>=n or j>=n or (i,j) in visited or m[i][j]==0:
+                return 
+            if i==n-1 and j==n-1:
+                ans.append(op)
+                return
+            
+            visited.add((i , j))
+    
+            fun(i , j-1 , op+"L")
+            fun(i , j+1, op+"R")
+            fun(i-1 , j, op+"U")
+            fun(i+1 , j, op+"D")
+            
+            visited.remove((i,j))
+            
+        fun(0,0,"")
+        
+        return ans
+            

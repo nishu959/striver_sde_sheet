@@ -1,0 +1,24 @@
+def findNthRootOfM(n,m):
+    # Write your Code here
+    
+    def mul(num , n):
+        ans = 1.0
+        for i in range(n):
+            ans *= num
+        return ans
+        
+        
+    low = 1
+    high = m 
+    while (high-low) >0.00000001:
+        mid = (low+high)/2
+        if mul(mid , n) < m:
+            low = mid
+        else:
+            high = mid
+    
+    
+    low = round(low , 6) 
+    return format(low, '.6f')
+
+        

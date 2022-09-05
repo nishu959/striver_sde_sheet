@@ -1,0 +1,64 @@
+class TrieNode:
+    def __init__(self):
+        self.child = {}
+        self.end = False
+        
+
+class Trie:
+    
+    def __init__(self):
+        self.root = TrieNode()
+        self.dp = [None]*(301)
+    
+
+    def insert(self, word):
+        node = self.root
+        for ch in word:
+            if ch not in node.child:
+                node.child[ch]=TrieNode()
+            node = node.child[ch]
+        
+        node.end = True
+        
+    
+    
+    # @lru_cache
+    def search(self, word, start):
+        
+        if self.dp[start]!=None:
+            return self.dp[start]
+        
+        if start >= len(word):
+            return True
+        
+        node = self.root
+        
+        for i in range(start , len(word)):
+            if word[i] not in node.child:
+                return False
+            
+            node = node.child[word[i]]
+            
+            if node.end:
+                p = self.search(word , i+1)
+                
+                self.dp[i+1] = p
+                if p==True:
+                    return True
+                
+        self.dp[start]=False       
+        return False
+    
+        
+                
+    
+        
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        trie = Trie()
+        for word in wordDict:
+            trie.insert(word)
+        
+        return trie.search(s, 0)
+        
